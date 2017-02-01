@@ -52,6 +52,7 @@
             $kievstar = "067-123-45-67";
             echo "Номер Киевстар: $kievstar <br>";
             echo  "Номер МТС: 095" . substr($kievstar,3). "<hr> <hr><hr>";   
+            echo  "Номер МТС 2й вариант: " . str_replace(067, 095, $kievstar). "<hr> <hr><hr>";   
             
             $tagStr = '<!DOCTYPE html><html><head><script>window.getYourPrivateBrowserCoockiesDataAndSendToBadGuys();<script></head><body>Site Content</body></html>';
             echo "С тэгами: <pre>" . HtmlSpecialChars($tagStr) . "</pre>";
