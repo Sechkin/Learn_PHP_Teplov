@@ -62,8 +62,18 @@
             echo "<pre>$randomStr</pre>" . " Количество символов: " . strlen($randomStr) . "<hr>";
             echo "Задом наперед: <pre>" . strrev($randomStr) . "</pre><hr> <hr><hr>";
             
-            $hwStr = 'hello world';
+            $hwString = 'hello world';
+            echo "<pre>$hwString</pre>";
+            echo ucfirst($hwString) . "<br>";
+            echo ucwords($hwString) . "<br>";
+            echo strtoupper($hwString) . "<br>";
+            echo strtolower($hwString) . "<hr> <hr><hr>";
             
+            $creativeTask = "some random text 'Hello, PHP progrаmmer!' some random text";
+            echo "<pre>$creativeTask</pre>";
+            $creativeArray = explode("'", $creativeTask);
+            $creativeCenter = $creativeArray[1];
+            echo $creativeCenter;
         ?>
     </body>
 </html>
