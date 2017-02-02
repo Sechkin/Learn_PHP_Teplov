@@ -31,6 +31,7 @@
     <body>
         <?php
             $array = array('w' => 44, 'a' => 78, 'h' => 45, 'c' => 67, 'b' => 4);
+            $array1 = array();
             echo "<b>Start array</b><br>";
             foreach ($array as $key => $value) {
                 echo "<span>$key $value</span><br>";
@@ -62,7 +63,7 @@
                 echo "Существует<br>";
             } else {
                 echo "Нема такого<br>";
-            }      
+            }
             echo "<b>разбить массив на кусочки по два элемента. на выходе получиться двумерный массив. тоесть массив состоящий из массивов по два элемента в каждом.</b><br>";
             print_r(array_chunk($array, 2, TRUE));
             echo "<br>";
@@ -70,9 +71,63 @@
             print_r(array_slice($array, 0, 3));
             echo "<br>";
             echo "<b>перевернуть массив местами</b><br>";
-            print_r($array);
             print_r(array_reverse($array));
             echo "<br>";
+            echo "<b>посчитать количество элементов в массиве.</b><br>";
+            print_r(count($array));
+            echo "<br>";
+            echo "<b>проверить, не пустой ли массив</b><br>";
+            echo "<span>1й вариант</span>";
+            if ($array) {
+                echo "Не пустой<br>";
+            } else {
+                echo "Пустой<br>";
+            }
+            echo "<span>2й вариант</span>";
+            if (empty($array)) {
+                echo "Пустой<br>";
+            } else {
+                echo "Не пустой<br>";
+            }
+            echo "<span>3й вариант</span>";
+            if (count($array)) {
+                echo "Не пустой<br>";
+            } else {
+                echo "Пустой<br>";
+            }
+            echo "<b>вывести на экран элемент по ключу 'w'</b><br>";
+            if (array_key_exists('w', $array)) {
+                print_r($array['w']);
+            } else {
+                print_r('Такого ключа нема');
+            }
+            echo "<br>";
+            echo "<b>присвоить значение '123' элементу с ключом 'a'</b><br>";
+            if (array_key_exists('a', $array)) {
+                $array['a'] = 123;
+                foreach ($array as $key => $value) {
+                    echo "<span>$key $value</span><br>";
+                }
+            } else {
+                echo "Нет такой буквы, крутите барабан!<br>";
+            }
+            echo "<b>добавить в массив новый элемент с ключом 'f' и значением 55</b><br>";
+            $array[f] = 55;
+            foreach ($array as $key => $value) {
+                echo "<span>$key $value</span><br>";
+            }
+            echo "<b>добавить новое значение в эелемент. ключ мы не присваиваем, только значение. вывести на экран и посмотреть какой будет ключ нового элемента.</b><br>";
+            array_push($array, 1024);
+            print_r($array);
+            echo "<br>";
+            echo "<b> поместить в переменную первый элемент массива как будто мы не знаем ключ</b><br>";
+            reset($array);
+            $first = current($array);
+            print_r($first);
+            echo "<br>";
+            echo "<b> дан массив [1,1,23,45] - убрать из массива повторяющеися значения</b><br>";
+            $array2 = array(1, 1, 23, 45);
+            print_r(array_unique($array2));
         ?>
     </body>
 </html>
