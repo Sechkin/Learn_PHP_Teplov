@@ -46,13 +46,33 @@
                 echo "<span>$key $value</span><br>";
             }
             echo "<b>проверить, есть ли в массиве ключ 'f'</b><br>";
-            if ($array['f']) {
+            if (isset($array['f'])) {
+                echo "Существует<br>";
+            } else {
+                echo "Нема такого<br>";
+            }
+            echo "<b>2й вариант</b><br>";
+            if (array_key_exists('f', $array)) {
                 echo "Существует<br>";
             } else {
                 echo "Нема такого<br>";
             }
             echo "<b>проверить, есть ли в массиве значение '56'</b><br>";
-            
+            if (in_array(56, $array)) {
+                echo "Существует<br>";
+            } else {
+                echo "Нема такого<br>";
+            }      
+            echo "<b>разбить массив на кусочки по два элемента. на выходе получиться двумерный массив. тоесть массив состоящий из массивов по два элемента в каждом.</b><br>";
+            print_r(array_chunk($array, 2, TRUE));
+            echo "<br>";
+            echo "<b>обрезать массив. оставить в нем первые три элемента</b><br>";
+            print_r(array_slice($array, 0, 3));
+            echo "<br>";
+            echo "<b>перевернуть массив местами</b><br>";
+            print_r($array);
+            print_r(array_reverse($array));
+            echo "<br>";
         ?>
     </body>
 </html>
