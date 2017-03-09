@@ -1,0 +1,32 @@
+
+-- выбрать все категории;
+SELECT * FROM `category`
+
+-- выбрать категорию с айдишником 2;
+SELECT * FROM `category` where category_id='2'
+
+-- выбрать категорию название которой 'CocaCola'
+SELECT * FROM `category` where categoryName='Coca-Cola'
+
+-- выбрать категорию название которой содержит 'Cola'
+SELECT * FROM `category` where categoryName='Cola'
+SELECT * FROM `category` WHERE categoryName LIKE '%Cola%'
+
+-- выбрать все активные категории
+SELECT * FROM `category` where status='1'
+
+-- выбрать все продукты с ценой большй одного доллара
+SELECT * FROM `products` where price >1
+
+-- выбрать все продукты с ценой большй одного доллара но меньше трех долларов
+<!--если бы надо было выбрать включая крайние цифры, то:
+SELECT * FROM `products` where price BETWEEN 1 AND  3  -->
+SELECT * FROM `products` where price > 1 AND price< 3
+
+-- выбрать все продукты категории кокакола
+SELECT `products`.* FROM category , products WHERE products.category_id = category.category_id AND categoryName='Coca-Cola';
+
+-- выбрать все продукты из всех активных категорий цена которых больше одного доллара и
+ меньше трех в названии которых есть слово 'Cola'
+ SELECT `products`.* FROM category , products WHERE products.category_id = category.category_id AND price > 1 AND price< 3 AND status='1' AND productName LIKE '%Cola%';
+ 

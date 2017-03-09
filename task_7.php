@@ -13,7 +13,7 @@
         <?php
 
         class A {
-
+            
             public $public = 'public1';
             protected $protected = 'protected1';
             private $private = 'private1';
