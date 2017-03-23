@@ -1,0 +1,70 @@
+1. прочитать: 
+- что такое JEFT join, RIGHT join, INNER join. 
+- что такое связи: один к одному, один ко многим, многие ко многим
+- прочитать про функции(distinct, avg, count, max, min)
+- что такое order, limit, offset, group by
+
+2.сделать
+- реализовать связь многие ко многим между категориями и продуктами таким образом:
+-- создать новый продукты под названием 'CocaPepsi 0.5 liter' , 'CocaPepsi 1 liter'  ,
+ 'CocaPepsi 1.5 liter' и сделать так чтобы они соответственно были и в тех и в других категориях.
+ и один продукт сделать "Pivo 2 liter" - его не включать ни в какую категорию. оставить отношение 
+старых продуктов с категориями такое же как было но с учетом новой архитектуры базы данных.
+- написать запросы:
+- выбрать уникальные названия категорий всех продуктов
+SELECT DISTINCT categoryName FROM category
+
+- цены каждого продукта из категории кокала
+SELECT price, productname FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola'
+
+- максимальную цену кокальных продуктов( я вывел все максимальные цены)
+SELECT price, productname FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola' AND price=(SELECT MAX(price) FROM products)
+
+Если же надо вернуть одно значение, то:
+ SELECT price, productname FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola' AND price=(SELECT MAX(price) FROM products) LIMIT 1
+
+- минимальную цену кокальных продуктов
+SELECT price, productname FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola' AND price=(SELECT MIN(price) FROM products) LIMIT 1
+
+- среднюю цену кокальных продуктов
+SELECT AVG(price) FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola'
+
+- посчитать количество кокальных продуктов
+SELECT COUNT(productname) FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+                WHERE category.categoryName = 'cocacola'
+
+- название категории и название продуктов. выборку делать сначала из категории 
+(приджоиниваем продукты) а потом наоборот. сделать это со всеми видами джоинов и 
+посмотреть что получится в результате.
+SELECT categoryname, productname  FROM products 
+        RIGHT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            RIGHT JOIN category ON  productscategory.category_id = category.id 
+
+SELECT categoryname, productname  FROM products 
+        LEFT JOIN  ProductsCategory ON  products.id = productscategory.products_id 
+            LEFT JOIN category ON  productscategory.category_id = category.id 
+                
+
+- написать запрос который нам реализует пагинацию на странице: условно говоря на странице 10 
+продуктов и нам щас нужна третья страница
+SELECT * FROM products ORDER BY id LIMIT 21, 10
+
+- как реализовать связь один к одному? достаточно просто написать ответ
+Как правило, просто записав данные в одной таблице
